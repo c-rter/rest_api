@@ -2,7 +2,7 @@ const express = require("express");
 const monk = require("monk");
 const Joi = require("@hapi/joi");
 const db = monk(process.env.MONGO_URI);
-const faqs = db.get("faqs");
+const faqs = db.get("movies");
 
 const schema = Joi.object({
   question: Joi.string().trim().required(),
@@ -18,8 +18,10 @@ const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    const items = await faqs.find({});
-    res.json(req.query);
+    const searchYear = parseInt(req.query.year);
+    const items = await faqs.find({year: searchYear || 0});
+  //  res.json(req.query.year);
+   res.json(items);
   } catch (error) {
     next(error);
   }
