@@ -13,10 +13,13 @@ const schema = Joi.object({
 const router = express.Router();
 
 // READ ALL
+// http://localhost:port/api/v1/faqs?pass=me&another=string
+// req.query = {"pass": "me", "another": "string"}
+
 router.get("/", async (req, res, next) => {
   try {
     const items = await faqs.find({});
-    res.json(items);
+    res.json(req.query);
   } catch (error) {
     next(error);
   }
