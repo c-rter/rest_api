@@ -5,6 +5,22 @@ const db = monk(process.env.MONGO_URI);
 const quotes = db.get("quotes");
 
 const schema = Joi.object({
+  _id: Joi.string().trim().required(),
+  author: Joi.string().trim().required(),
+  quote: Joi.string().trim().required(),
+  language: Joi.string().trim().required(),
+  year: Joi.object({
+    yearNum: Joi.number().integer().min(0).max(2020),
+    yearType: Joi.string().trim().required()
+  }),
+  source: Joi.string().trim(),
+  tags: Joi.array().items(
+    Joi.string().trim()
+  )
+
+});
+
+const schemaNID = Joi.object({
   author: Joi.string().trim().required(),
   quote: Joi.string().trim().required(),
   language: Joi.string().trim().required(),
@@ -178,7 +194,7 @@ router.get("/:id", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     console.log(req.body);
-    const value = await schema.validateAsync(req.body);
+    const value = await schemaNID.validateAsync(req.body);
     const inserted = await quotes.insert(value);
     res.json(inserted);
   } catch (error) {
@@ -186,7 +202,40 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-// UPDATE ONE
+
+/**
+ * @swagger
+ * /quotes/{id}:
+ *  put:
+ *    summary: Update the quote by the id
+ *    tags: [Quotes]
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: The quote id
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Quote'
+ *    responses:
+ *      200:
+ *        description: The quote was updated
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Quote'
+ *      404:
+ *        description: The quote was not found
+ *      500:
+ *        description: Some error happened
+ */
+
+
 router.put("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
