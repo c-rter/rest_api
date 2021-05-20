@@ -2,12 +2,18 @@ const express = require("express");
 const monk = require("monk");
 const Joi = require("@hapi/joi");
 const db = monk(process.env.MONGO_URI);
-const faqs = db.get("movies");
+const faqs = db.get("faqs");
 
 const schema = Joi.object({
-  question: Joi.string().trim().required(),
-  answer: Joi.string().trim().required(),
-  video_url: Joi.string().uri(),
+  author: Joi.string().trim().required(),
+  quote: Joi.string().trim().required(),
+  language: Joi.string().trim().required(),
+  year: Joi.number().integer().min(1900).max(1996),
+  source: Joi.string().trim(),
+  tags: Joi.array().items(
+    Joi.string().trim()
+  )
+  
 });
 
 const router = express.Router();
@@ -18,8 +24,8 @@ const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    const searchYear = parseInt(req.query.year);
-    const items = await faqs.find({year: searchYear || 0});
+ //   const searchYear = parseInt(req.query.year); year: searchYear || 0
+    const items = await faqs.find({});
   //  res.json(req.query.year);
    res.json(items);
   } catch (error) {
