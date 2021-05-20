@@ -117,35 +117,26 @@ router.get("/", async (req, res, next) => {
 /**
  * @swagger
  * /quotes/{id}:
- *  put:
- *    summary: Update the quote by the id
- *    tags: [Quotes]
- *    parameters:
- *      - in: path
- *        name: id
- *        schema:
- *          type: string
- *        required: true
- *        description: The quote id
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            $ref: '#/components/schemas/Quotes'
- *    responses:
- *      200:
- *        description: The quote was updated
- *        content:
- *          application/json:
- *            schema:
- *              $ref: '#/components/schemas/Quotes'
- *      404:
- *        description: The quote was not found
- *      500:
- *        description: Some error happened
+ *   get:
+ *     summary: Get the quote by id
+ *     tags: [Quotes]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The quote id
+ *     responses:
+ *       200:
+ *         description: The quote description by id
+ *         contents:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Quote'
+ *       404:
+ *         description: The quote was not found
  */
-
 
 router.get("/:id", async (req, res, next) => {
   try {
