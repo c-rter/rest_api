@@ -107,6 +107,20 @@ const router = express.Router();
  *   get:
  *     summary: Returns the list of all the quotes
  *     tags: [Quotes]
+ *     produces:
+ *     - "application/xml"
+ *     - "application/json"
+ *     parameters:
+ *        -  in: query
+ *           name: author
+ *           schema: 
+ *             type: string
+ *           description: author's name
+ *        -  in: query
+ *           name: language
+ *           schema: 
+ *             type: string
+ *           description: language of quote
  *     responses:
  *       200:
  *         description: The list of the quotes
