@@ -17,9 +17,9 @@ const options = {
 	definition: {
 		openapi: "3.0.0",
 		info: {
-			title: "Motivation Quote API",
+			title: "Quote API",
 			version: "1.0.0",
-			description: "A simple motivational quote API",
+			description: "An API database containing a wide variety of quotes.",
 		},
 		servers: [
 			{
