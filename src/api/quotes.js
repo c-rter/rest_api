@@ -238,7 +238,7 @@ router.post("/", async (req, res, next) => {
  * @swagger
  * /quotes/{id}:
  *  put:
- *    summary: Update a quote by id
+ *    summary: Update a quote object in the database
  *    tags: [Quotes]
  *    parameters:
  *      - in: path
@@ -260,7 +260,7 @@ router.post("/", async (req, res, next) => {
  *      404:
  *        description: The quote object was not found at the submitted _id parameter.
  *      500:
- *        description: Invalid format for submitted _id parameter or server error. If format invalid, response will contain an object with error message.
+ *        description: Invalid format for submitted quote object, _id parameter, or server error. If invalid format or _id, response will contain an object with error message.
  */
 
 
@@ -290,7 +290,7 @@ router.put("/:id", async (req, res, next) => {
  * @swagger
  * /quotes/{id}:
  *   delete:
- *     summary: Remove a quote by id
+ *     summary: Remove a quote object from the database
  *     tags: [Quotes]
  *     parameters:
  *       - in: path
@@ -302,9 +302,11 @@ router.put("/:id", async (req, res, next) => {
  * 
  *     responses:
  *       200:
- *         description: The quote was deleted
+ *         description: The quote object was deleted successfully from the database. 
  *       404:
- *         description: The quote was not found
+ *         description: The quote object was not found at the submitted _id parameter.
+ *       500:
+ *         description: Invalid format for submitted _id parameter or server error. If format invalid, response will contain an object with error message.
  */
 
 
@@ -313,12 +315,24 @@ router.put("/:id", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
 
   try {
+/*
+    const item = await quotes.findOne({
+      _id: id,
+    });
+    if (!item) {
+      res.status(404);
+    } */
+
     const { id } = req.params;
+
+    const item = await quotes.findOne({
+      _id: id,
+    });
+    if (!item) return next();
+
     await quotes.remove({ _id: id });
-    res.status(200).send('Success')
-    res.json({
-      message: 'Success'
-    })
+    res.status(200).send('Quote object succesfully deleted from the database.')
+
   }
   catch (error) {
     next(error);
