@@ -105,11 +105,11 @@ const router = express.Router();
  * @swagger
  * /quotes:
  *   get:
- *     summary: Returns the list of all the books
+ *     summary: Returns the list of all the quotes
  *     tags: [Quotes]
  *     responses:
  *       200:
- *         description: The list of the books
+ *         description: The list of the quotes
  *         content:
  *           application/json:
  *             schema:
@@ -121,8 +121,13 @@ const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   try {
+    let items = {};
     //   const searchYear = parseInt(req.query.year); year: searchYear || 0
-    const items = await quotes.find({});
+    if (Object.keys(req.query).length === 0) {
+    items = await quotes.find({});
+    }
+    else if (req.query.year !== undefined && req.query.language !== undefined) {
+    }
     //  res.json(req.query.year);
     res.json(items);
   } catch (error) {
@@ -134,7 +139,7 @@ router.get("/", async (req, res, next) => {
  * @swagger
  * /quotes/{id}:
  *   get:
- *     summary: Get the quote by id
+ *     summary: Get a quote by id
  *     tags: [Quotes]
  *     parameters:
  *       - in: path
@@ -207,7 +212,7 @@ router.post("/", async (req, res, next) => {
  * @swagger
  * /quotes/{id}:
  *  put:
- *    summary: Update the quote by the id
+ *    summary: Update a quote by id
  *    tags: [Quotes]
  *    parameters:
  *      - in: path
@@ -262,7 +267,7 @@ router.put("/:id", async (req, res, next) => {
  * @swagger
  * /quotes/{id}:
  *   delete:
- *     summary: Remove the quote by id
+ *     summary: Remove a quote by id
  *     tags: [Quotes]
  *     parameters:
  *       - in: path
