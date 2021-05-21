@@ -126,7 +126,10 @@ router.get("/", async (req, res, next) => {
     if (Object.keys(req.query).length === 0) {
     items = await quotes.find({});
     }
-    else if (req.query.year !== undefined && req.query.language !== undefined) {
+    else if (req.query.author !== undefined) {
+      items = await quotes.findOne({
+        author: req.query.author,
+      });
     }
     //  res.json(req.query.year);
     res.json(items);
