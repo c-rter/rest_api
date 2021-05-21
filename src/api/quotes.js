@@ -99,14 +99,14 @@ const router = express.Router();
  * @swagger
  * tags:
  *   name: Quotes
- *   description: Routes for connecting with the Motivational Quote API
+ *   description: Routes for connecting with the Quote Database API
  */
 
 /**
  * @swagger
  * /quotes:
  *   get:
- *     summary: Returns an array containing quote objects in database, refinable with query parameters.
+ *     summary: Retrieve an array containing quote objects, refinable with query parameters.
  *     tags: [Quotes]
  *     produces:
  *     - "application/xml"
@@ -124,13 +124,8 @@ const router = express.Router();
  *          description: language of quote
  *     responses:
  *       200:
- *         description: The list of the quotes
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Quote'
+ *         description: Client request successful. A request without query parameters will return an array of all quote objects currently in the database. A request with query parameters will return an array of quote objects that match the parameter, or a string message indicating no matches. 
+ *      
  */
 
 
@@ -159,12 +154,16 @@ router.get("/", async (req, res, next) => {
       });
     }
 
-    res.json(items);
-
+    if (Object.keys(items).length === 0) {
+      throw "Successfully queried, but no quote objects were found with your parameters."
+    }
+    else {
+      res.json(items);
+    }
     //  res.json(req.query.year);
 
   } catch (error) {
-    next(error);
+    return res.send(error);
   }
 });
 
@@ -172,7 +171,7 @@ router.get("/", async (req, res, next) => {
  * @swagger
  * /quotes/{id}:
  *   get:
- *     summary: Get a quote by id
+ *     summary: Retrieve a single quote object from the database.
  *     tags: [Quotes]
  *     parameters:
  *       - in: path
@@ -183,13 +182,11 @@ router.get("/", async (req, res, next) => {
  *         description: The quote id
  *     responses:
  *       200:
- *         description: The quote description by id
- *         contents:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Quote'
+ *         description: Client request successful. Response will contain requested single quote object. 
  *       404:
- *         description: The quote was not found
+ *         description: The quote object was not found at the submitted _id parameter.
+ *       500:
+ *         description: Invalid format for submitted _id parameter or server error. If format invalid, response will contain an object with error message.
  */
 
 router.get("/:id", async (req, res, next) => {
@@ -209,7 +206,7 @@ router.get("/:id", async (req, res, next) => {
  * @swagger
  * /quotes:
  *   post:
- *     summary: Add a new quote to the archive.
+ *     summary: Add a custom quote object to the database.
  *     tags: [Quotes]
  *     requestBody:
  *       required: true
@@ -220,13 +217,9 @@ router.get("/:id", async (req, res, next) => {
  *             $ref: '#/components/schemas/Quote'
  *     responses:
  *       200:
- *         description: The quote was successfully addeded
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Quote'
+ *         description: Your quote object was successfully added to the database. The response will contain the quote object as it now appears in the database, with its newly generated _id value. This _id value can be used to target the specific quote object in future API requests.
  *       500:
- *         description: Some server error
+ *         description: Submitted quote object has failed validation, or server error. If validation failed, response will contain object with validation error details.
  */
 
 router.post("/", async (req, res, next) => {
@@ -256,21 +249,18 @@ router.post("/", async (req, res, next) => {
  *        description: The quote id
  *    requestBody:
  *      required: true
+ *      description: Remove _id from sample object when POSTing
  *      content:
  *        application/json:
  *          schema:
  *            $ref: '#/components/schemas/Quote'
  *    responses:
  *      200:
- *        description: The quote was updated
- *        content:
- *          application/json:
- *            schema:
- *              $ref: '#/components/schemas/Quote'
+ *        description: Client request successful. Response will contain updated quote object. 
  *      404:
- *        description: The quote was not found
+ *        description: The quote object was not found at the submitted _id parameter.
  *      500:
- *        description: Some error happened
+ *        description: Invalid format for submitted _id parameter or server error. If format invalid, response will contain an object with error message.
  */
 
 
