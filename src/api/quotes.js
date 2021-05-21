@@ -121,18 +121,33 @@ const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    let items = {};
+    let items = null;
     //   const searchYear = parseInt(req.query.year); year: searchYear || 0
+
     if (Object.keys(req.query).length === 0) {
-    items = await quotes.find({});
+      items = await quotes.find({});
     }
-    else if (req.query.author !== undefined) {
-      items = await quotes.findOne({
+    else if (req.query.author !== undefined && req.query.language !== undefined) {
+      items = await quotes.find({
         author: req.query.author,
+        language: req.query.language
       });
     }
-    //  res.json(req.query.year);
+    else if (req.query.author !== undefined) {
+      items = await quotes.find({
+        author: req.query.author
+      });
+    }
+    else if (req.query.language !== undefined) {
+      items = await quotes.find({
+        language: req.query.language
+      });
+    }
+
     res.json(items);
+
+    //  res.json(req.query.year);
+
   } catch (error) {
     next(error);
   }
