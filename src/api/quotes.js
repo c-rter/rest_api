@@ -258,7 +258,30 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
-// CREATE ONE
+/**
+ * @swagger
+ * /quotes/{id}:
+ *   delete:
+ *     summary: Remove the quote by id
+ *     tags: [Quotes]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The quote id
+ * 
+ *     responses:
+ *       200:
+ *         description: The quote was deleted
+ *       404:
+ *         description: The quote was not found
+ */
+
+
+
+
 router.delete("/:id", async (req, res, next) => {
 
   try {
