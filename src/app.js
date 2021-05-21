@@ -9,6 +9,10 @@ const quoteRouter = require("./api/quotes");
 
 const middlewares = require('./middlewares');
 
+var options1 = {
+	customCss: '.swagger-ui .topbar { display: none }'
+  };
+
 const options = {
 	definition: {
 		openapi: "3.0.0",
@@ -42,7 +46,7 @@ app.get('/', (req, res) => {
   });
 });
 
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs, options1));
 
 app.use('/quotes', quoteRouter);
 
