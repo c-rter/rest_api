@@ -10,7 +10,8 @@ const quoteRouter = require("./api/quotes");
 const middlewares = require('./middlewares');
 
 const cCss = {
-	customSiteTitle: "Quote Database API"
+	customSiteTitle: "Quote Database API",
+	customCss: '.swagger-ui .topbar { display: none }'
 };
 
 const options = {
