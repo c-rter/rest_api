@@ -80,11 +80,11 @@ const router = express.Router();
  *              type: string
  *       example:
  *         _id: "d5fE_asz"
- *         author: Alexander G. Wilson
+ *         author: Jose G. Wilmez
  *         quote: The finest of all quotes come from the heart 
  *         language: English
  *         year: 
- *           yearNum: 1927
+ *           yearNum: 1986
  *           yearType: CE
  *         source: Anthologies on Poetry vol 7
  *         tags:
