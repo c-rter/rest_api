@@ -238,7 +238,7 @@ router.post("/", async (req, res, next) => {
  * @swagger
  * /quotes/{id}:
  *  put:
- *    summary: Update a quote object in the database
+ *    summary: Update a quote object in the database.
  *    tags: [Quotes]
  *    parameters:
  *      - in: path
@@ -290,7 +290,7 @@ router.put("/:id", async (req, res, next) => {
  * @swagger
  * /quotes/{id}:
  *   delete:
- *     summary: Remove a quote object from the database
+ *     summary: Remove a quote object from the database.
  *     tags: [Quotes]
  *     parameters:
  *       - in: path
