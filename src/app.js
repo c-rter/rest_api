@@ -54,7 +54,7 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
   res.json({
-    message: '📚 QUOTE DATABASE 📚 Documentation at /api-docs/ 👩🏽‍🏫'
+    message: '📚 QUOTE DATABASE 📚 Documentation at /api-docs/'
   });
 });
 
