@@ -1,6 +1,6 @@
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <h1 align="left"> 
-Quote Database API and Docs</h1>
+📚 Quote Database API and Docs 📚</h1>
 
 Use this RESTful API to perform CRUD operations on a database of quotes.  
 
@@ -8,7 +8,7 @@ Interactive Swagger documentation allows you to test API operations live.
 
 ---
 
-API Request URL: [https://rest-api-docs.herokuapp.com](https://rest-api-docs.herokuapp.com/api-docs/)  
+API Request URL: [https://rest-api-docs.herokuapp.com](https://rest-api-docs.herokuapp.com/)  
 
 Test Live with Swagger Documentation: [https://rest-api-docs.herokuapp.com/api-docs/](https://rest-api-docs.herokuapp.com/api-docs/)
 
