@@ -8,7 +8,9 @@ Test Live with Swagger Documentation: [https://rest-api-docs.herokuapp.com/api-d
 
 ---
 
-Use this RESTful API to perform CRUD operations on a database of quotes. Interactive Swagger documentation allows you to test API operations live. 
+Use this RESTful API to perform CRUD operations on a database of quotes.
+
+Interactive Swagger documentation allows you to test API operations live. 
 
 _Created by Carter Lawson at [SUPERMAPLE.systems](https://www.supermaple.systems)_
 
