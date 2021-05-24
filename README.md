@@ -14,6 +14,8 @@ Test Live with Swagger Documentation: [https://rest-api-docs.herokuapp.com/api-d
 
 ---
 
+![](DocNavigation.gif)
+
 _Created by Carter Lawson at [SUPERMAPLE.systems](https://www.supermaple.systems)_
 
 ## 🧱 Stack
