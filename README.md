@@ -4,7 +4,7 @@
 
 Use this RESTful API to perform CRUD operations on a database of quotes.  
 
-Interactive Swagger documentation allows you to test API operations live.  
+Interactive Swagger documentation allows you to test API requests live.  
 
 ---
 
