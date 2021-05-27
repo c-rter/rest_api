@@ -116,12 +116,12 @@ const router = express.Router();
  *          name: author
  *          schema: 
  *            type: string
- *          description: author's name
+ *          description: author's name, case sensitive
  *       -  in: query
  *          name: language
  *          schema: 
  *            type: string
- *          description: language of quote
+ *          description: language of quote, case sensitive
  *     responses:
  *       200:
  *         description: Client request successful. A request without query parameters will return an array of all quote objects currently in the database. A request with query parameters will return an array of quote objects that match the parameter, or a string message indicating no matches. 
